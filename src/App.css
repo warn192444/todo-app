@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.Input-style {
+  position: fixed;
+  left: 20px;
+  right: 20px;
+  max-width: 500px;
+  margin: auto;
+}

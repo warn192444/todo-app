@@ -1,5 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
+import { Button, ListGroup, InputGroup, FormControl } from 'react-bootstrap';
 
 function App() {
 
@@ -9,6 +10,7 @@ function App() {
     else return [];
   });
   const [todo, setTodo] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
@@ -50,25 +52,29 @@ function App() {
       <h1>TODO List</h1>
 
       <form onSubmit={handleFormSubmit}>
-        <input 
-          type="text" 
-          name="todo" 
-          placeholder="Create a new todo"
-          value={todo}
-          onChange={handleInputChange}
-        />
+        <InputGroup className="Input-style">
+          <FormControl
+            type="text" 
+            name="todo" 
+            placeholder="Create a new todo"
+            value={todo}
+            onChange={handleInputChange}
+          />
+          <Button variant="dark">ADD</Button>
+        </InputGroup>
+        <br/>
       </form>
 
-      <ul className="todo-list">
+      <ListGroup as="ul" className="todo-list">
         {todos.map((item) => (
-          <li key={item.id}>
+          <ListGroup.Item as="li" key={item.id} font-size="30px">
             {item.text}
             {"  "}
-            <button onClick={() => handleDeleteClick(item.id)}> delete </button>
+            <Button variant="danger" onClick={() => handleDeleteClick(item.id)}> Delete </Button>
             <br/>
-          </li>
+          </ListGroup.Item>
         ))}
-      </ul>
+      </ListGroup>
 
     </div>
   );
